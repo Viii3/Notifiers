@@ -1,5 +1,5 @@
 <!--
-Copyright (c) 2017 Payara Foundation and/or its affiliates. All rights reserved.
+Copyright (c) [2017-2024] Payara Foundation and/or its affiliates. All rights reserved.
 
 The contents of this file are subject to the terms of either the GNU
 General Public License Version 2 only ("GPL") or the Common Development
@@ -53,7 +53,7 @@ holder.
                 method="GET" result="#{requestScope.resp}");
         setPageSessionAttribute(key="valueMap", value="#{requestScope.resp.data.extraProperties.notifierConfiguration}");
         mapPut(map="#{pageSession.valueMap}" key="target" value="#{pageSession.configName}");
-        setPageSessionAttribute(key="convertToFalseList", value={"enabled", "noisy", "dynamic", "securityDisabled"});
+        setPageSessionAttribute(key="convertToFalseList", value={"enabled", "dynamic", "securityDisabled"});
         
         if (#{pageSession.valueMap['enabled']}=true) {
             setPageSessionAttribute(key="enabledSelected", value="true");
@@ -62,9 +62,6 @@ holder.
         if (#{pageSession.valueMap['securityDisabled']}=true) {
             setPageSessionAttribute(key="securityDisabledSelected", value="true");
         }
-        if (#{pageSession.valueMap['noisy']}=true) {
-			setPageSessionAttribute(key="noisy", value="true");
-		}	
         setPageSessionAttribute(key="dynamic", value="true");
     /> 
 </event>
@@ -90,7 +87,6 @@ holder.
                         onClick="if (guiValidate('#{reqMsg}','#{reqInt}','#{reqPort}')) submitAndDisable(this, '$resource{i18n.button.Processing}'); return false;" >
                     <!command
                         mapPut(map="#{pageSession.valueMap}" key="enabled" value="#{pageSession.enabledSelected}");
-						mapPut(map="#{pageSession.valueMap}" key="noisy" value="#{pageSession.noisy}");
                         mapPut(map="#{pageSession.valueMap}" key="dynamic" value="#{pageSession.dynamic}");
                         mapPut(map="#{pageSession.valueMap}" key="securityDisabled" 
                                 value="#{pageSession.securityDisabledSelected}");
@@ -110,11 +106,6 @@ holder.
                           label="$resource{i18nxn.notifier.xmpp.configuration.enabledLabel}"  
                           helpText="$resource{i18nxn.notifier.xmpp.configuration.enabledLabelHelpText}">
                 <sun:checkbox id="enabledBox" selected="#{pageSession.enabledSelected}" selectedValue="true" />
-            </sun:property>
-            <sun:property id="noisy" labelAlign="left" noWrap="#{true}" overlapLabel="#{false}" 
-                          label="$resource{i18nn.notification.configuration.notifier.noisyLabel}"  
-                          helpText="$resource{i18nn.notification.configuration.notifier.noisyLabelHelpText}">
-                <sun:checkbox id="noisy" selected="#{pageSession.noisy}" selectedValue="true" />
             </sun:property>
             <sun:property id="dynamicProp" labelAlign="left" noWrap="#{true}" overlapLabel="#{false}" 
                           label="$resource{i18nn.notification.configuration.dynamic}"  
