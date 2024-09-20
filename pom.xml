@@ -95,7 +95,7 @@
             </dependency>
             <!-- Required for the notifier admin console plugins -->
             <dependency>
-                <groupId>fish.payara.server.internal.admingui</groupId>
+                <groupId>fish.payara.server.core.admingui</groupId>
                 <artifactId>console-plugin-service</artifactId>
                 <version>${payara.version}</version>
                 <optional>true</optional>
