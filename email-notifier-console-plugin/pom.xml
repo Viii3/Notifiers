@@ -48,7 +48,6 @@
     </parent>
 
     <artifactId>email-notifier-console-plugin</artifactId>
-    <version>2.1-SNAPSHOT</version>
     <packaging>glassfish-jar</packaging>
 
     <name>Email Notifier Console Plugin</name>

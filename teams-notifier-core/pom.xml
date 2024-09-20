@@ -49,7 +49,6 @@
 
     <artifactId>teams-notifier-core</artifactId>
     <packaging>glassfish-jar</packaging>
-    <version>2.1-SNAPSHOT</version>
 
     <name>Microsoft Teams Notifier Implementation</name>
 
