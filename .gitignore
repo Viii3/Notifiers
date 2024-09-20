@@ -9,3 +9,4 @@ target/
 .vscode/
 *.iml
 .idea/
+.DS_Store

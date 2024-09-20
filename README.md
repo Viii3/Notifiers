@@ -22,3 +22,6 @@ Note that if the notifier has any extra dependencies not provided by Payara Serv
 Custom notifiers can also be built to extend the functionality of the notification service. To implement a new notifier `core` and `console-plugin`, see the [example-notifier-core](./example-notifier-core) and [example-notifier-console-plugin](./example-notifier-console-plugin) modules respectively. You can copy these modules and refactor them to implement your own unique notifiers.
 
 If you implement a new notifier, please contribute to this repository so that people can use the notifiers you've written!
+
+### Notifiers Documentation
+Full documentation on using the Notifiers can be found in the [technical documentation](https://docs.payara.fish/community/docs/Technical%20Documentation/Payara%20Server%20Documentation/Extensions/Notifiers/Overview.html).
