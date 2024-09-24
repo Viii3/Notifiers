@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2021 Payara Foundation and/or its affiliates. All rights reserved.
+ * Copyright (c) [2021-2024] Payara Foundation and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -72,7 +72,8 @@ public abstract class BaseSetNotifierConfigurationCommand implements AdminComman
     @Param(name = "enabled")
     protected Boolean enabled;
 
-    @Param(name = "noisy", optional = true, defaultValue = "true")
+    @Deprecated
+    @Param(name = "noisy", optional = true, defaultValue = "true", obsolete = true)
     protected Boolean noisy;
 
     @Inject
@@ -80,7 +81,7 @@ public abstract class BaseSetNotifierConfigurationCommand implements AdminComman
 
     /**
      * Executes the provided asadmin command with the base set of notifier parameters:
-     * target, dynamic, enabled, and noisy.
+     * target, dynamic, and enabled.
      * Expected to be used with commands such as "set-email-notifier-configuration"
      *
      * @param context     The context of the invoking admin command
@@ -99,10 +100,6 @@ public abstract class BaseSetNotifierConfigurationCommand implements AdminComman
 
         if (StringUtils.ok(target)) {
             parameterMap.insert("target", target);
-        }
-
-        if (noisy != null) {
-            parameterMap.insert("noisy", noisy.toString());
         }
 
         try {
