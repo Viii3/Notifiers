@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     checkout changelog: false, poll: true, scm: [$class: 'GitSCM',
-                    branches: [[name: "Payara6-Enterprise"]],
+                    branches: [[name: "Payara6"]],
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [], 
                     submoduleCfg: [],

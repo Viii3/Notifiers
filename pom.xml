@@ -2,7 +2,7 @@
 <!--
   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-  Copyright (c) 2020-2023 Payara Foundation and/or its affiliates. All rights reserved.
+  Copyright (c) [2020-2024] Payara Foundation and/or its affiliates. All rights reserved.
 
   The contents of this file are subject to the terms of either the GNU
   General Public License Version 2 only ("GPL") or the Common Development
@@ -43,13 +43,13 @@
 
     <groupId>fish.payara.extensions.notifiers</groupId>
     <artifactId>notifiers-parent</artifactId>
-    <version>2.1-enterprise-SNAPSHOT</version>
+    <version>2.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Payara Notifiers Parent</name>
 
     <properties>
-        <payara.version>6.0.0</payara.version>
+        <payara.version>6.19.0</payara.version>
 
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
@@ -95,7 +95,7 @@
             </dependency>
             <!-- Required for the notifier admin console plugins -->
             <dependency>
-                <groupId>fish.payara.server.internal.admingui</groupId>
+                <groupId>fish.payara.server.core.admingui</groupId>
                 <artifactId>console-plugin-service</artifactId>
                 <version>${payara.version}</version>
                 <optional>true</optional>
@@ -106,6 +106,12 @@
                 <artifactId>jakarta.jakartaee-api</artifactId>
                 <version>10.0.0</version>
                 <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>fish.payara.api</groupId>
+                <artifactId>payara-api</artifactId>
+                <version>${payara.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -259,12 +265,17 @@
                     <configuration>
                         <excludeGroupIds>
                             fish.payara.server.core.common,
-                            fish.payara.server.internal.admingui,
+                            fish.payara.server.core.admingui,
                             jakarta
                         </excludeGroupIds>
                         <excludeTransitive>true</excludeTransitive>
                         <outputDirectory>${project.build.directory}</outputDirectory>
                     </configuration>
+                </plugin>
+                <plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-resources-plugin</artifactId>
+                   <version>2.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -321,72 +332,25 @@
             <name>Payara Public Artifacts</name>
             <url>https://nexus.dev.payara.fish/repository/payara-artifacts/</url>
         </repository>
-        <repository>
-            <id>payara-nexus-enterprise-distributions</id>
-            <url>https://nexus.dev.payara.fish/repository/payara-enterprise</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>payara-nexus-enterprise-artifacts</id>
-            <name>Payara Enterprise Artifacts</name>
-            <url>https://nexus.dev.payara.fish/repository/payara-enterprise-artifacts-private</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>payara-nexus-enterprise-snapshots</id>
-            <name>Payara Enterprise Snapshots</name>
-            <url>https://nexus.dev.payara.fish/repository/payara-enterprise-snapshots-private</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
     </repositories>
 
     <!-- Used for the deploy phase -->
     <distributionManagement>
-        <!-- Deploy to the main repo where the other distributions are published -->
         <repository>
-            <id>payara-nexus-enterprise-distributions</id>
-            <url>https://nexus.dev.payara.fish/repository/payara-enterprise/</url>
+            <id>payara-nexus-artifacts</id>
+            <url>https://nexus.dev.payara.fish/repository/payara-artifacts/</url>
         </repository>
     </distributionManagement>
-
     <profiles>
         <profile>
-            <id>deploy-internals</id>
-
+            <id>java11</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <jdk>11</jdk>
             </activation>
-
-            <properties>
-                <deploy.skip>false</deploy.skip>
-            </properties>
-
-            <distributionManagement>
-                <repository>
-                    <id>payara-nexus-enterprise-artifacts</id>
-                    <url>https://nexus.dev.payara.fish/repository/payara-enterprise-artifacts-private/</url>
-                </repository>
-                <snapshotRepository>
-                    <id>payara-nexus-enterprise-snapshots</id>
-                    <url>https://nexus.dev.payara.fish/repository/payara-enterprise-snapshots-private/</url>
-                </snapshotRepository>
-            </distributionManagement>
+            <modules>
+                <module>jfr-notifier-core</module>
+                <module>jfr-notifier-console-plugin</module>
+            </modules>
         </profile>
     </profiles>
-
 </project>
