@@ -112,6 +112,11 @@ holder.
                           helpText="$resource{i18nn.notification.configuration.notifier.dynamicHelp}">
                 <sun:checkbox id="dynamicBox" selected="#{pageSession.dynamic}" selectedValue="true" />
             </sun:property>
+            <sun:property id="filter" labelAlign="left" noWrap="#{true}" overlapLabel="#{false}"
+                          label="$resource{i18nn.notification.configuration.filter}"
+                          helpText="$resource{i18nn.notification.configuration.notifier.filterHelp}">
+                <sun:dropDown id="filterDropdown" selected="#{pageSession.valueMap['filter']}" labels={"INFO", "WARNING", "SEVERE"} />
+            </sun:property>
             <sun:property id="hostNameProp" labelAlign="left" noWrap="#{true}" overlapLabel="#{false}" 
                           label="$resource{i18nxn.notifier.xmpp.configuration.hostNameLabel}"  
                           helpText="$resource{i18nxn.notifier.xmpp.configuration.hostNameLabelHelpText}">
